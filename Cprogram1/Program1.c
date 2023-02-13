@@ -2,7 +2,7 @@
  * Program1.c
  *
  *  Created on: Feb 9, 2023
- *      Author: Samuel
+ *      Author: Samuel Buehler
  */
 
 #include<stdio.h>
@@ -13,23 +13,16 @@ void sales_report(float data[12])
 {
 	printf("Monthly sales report for 2022:\n");
 	printf("%-11s%s\n", "Month", "Sales");
+	/* For all 12 months, print the month and that month's respective sales number. */
 	for(int i = 0; i < 12; i++)
-	{
-		printf("%-11s", months[i]);
-		printf("$%.2f\n", data[i]);
-	}
-	printf("\n");
+		printf("%-11s$%.2f\n",months[i],data[i]);
 }
 
 
 void min_max_avg(float data[12])
 {
-	float minimum = data[0];
-	int minMonth = 0;
-	float maximum = data[0];
-	int maxMonth = 0;
-	float sum = 0.0;
-	float average;
+	float minimum = data[0], maximum = data[0], sum = 0.0, average;
+	int minMonth = 0, maxMonth = 0;
 
 	// Find minimum and minMonth
 	for (int i = 0; i < 12; i++)
@@ -51,17 +44,15 @@ void min_max_avg(float data[12])
 		sum += data[i];
 	average = sum/12;
 
-
-	printf("Sales summary:\n");
+	printf("\nSales summary:\n");
 	printf("%-16s$%-10.2f  (%s)\n", "Minimum sales:", minimum, months[minMonth]);
 	printf("%-16s$%-10.2f  (%s)\n", "Maximum sales:", maximum, months[maxMonth]);
-	printf("%-16s$%-10.2f", "Average sales:", average);
-	printf("\n\n");
+	printf("%-16s$%-10.2f\n", "Average sales:", average);
 }
 
 void six_month_avg(float data[12])
 {
-	printf("Six-Month Moving Average Report:\n");
+	printf("\nSix-Month Moving Average Report:\n");
 	for (int i = 0; i <= 6; i++)
 	{
 		printf("%-11s-  %-11s", months[i], months[i+5]);
@@ -72,13 +63,11 @@ void six_month_avg(float data[12])
 		avg = sum/6;
 		printf("$%.2f\n", avg);
 	}
-	printf("\n");
 }
 
 void print_sales_descending(float data[12])
 {
-	//float dataCopy[12];
-	printf("Sales Report (Highest to Lowest):\n");
+	printf("\nSales Report (Highest to Lowest):\n");
 	printf("%-16s %-11s\n", "Month", "Sales");
 
 	for (int i = 0; i < 12; ++i)
@@ -98,14 +87,12 @@ void print_sales_descending(float data[12])
 	}
 
 	for (int i = 0; i < 12; ++i)
-	{
 		printf("%-16s $%-11.2f\n",months[i],data[i]);
-	}
-
 }
 
 
 int main() {
+	/* Scans input file data into the data array. */
 	FILE *fp;
 	fp = fopen("input.txt","r");
 	float data[12];
@@ -119,6 +106,7 @@ int main() {
 	for(int i = 0; i < 12; i++)
 		fscanf(fp, "%f", &data[i]);
 	fclose(fp);
+
 	sales_report(data);
 	min_max_avg(data);
 	six_month_avg(data);
