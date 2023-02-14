@@ -15,7 +15,9 @@ void sales_report(float data[12])
 	printf("%-11s%s\n", "Month", "Sales");
 	/* For all 12 months, print the month and that month's respective sales number. */
 	for(int i = 0; i < 12; i++)
+	{
 		printf("%-11s$%.2f\n",months[i],data[i]);
+	}
 }
 
 
@@ -41,7 +43,9 @@ void min_max_avg(float data[12])
 
 	// Find average
 	for (int i = 0; i < 12; i++)
+	{
 		sum += data[i];
+	}
 	average = sum/12;
 
 	printf("\nSales summary:\n");
@@ -59,7 +63,9 @@ void six_month_avg(float data[12])
 		float sum = 0.0;
 		float avg;
 		for (int j = i; j < i+6; j++)
+		{
 			sum += data[j];
+		}
 		avg = sum/6;
 		printf("$%.2f\n", avg);
 	}
@@ -87,11 +93,14 @@ void print_sales_descending(float data[12])
 	}
 
 	for (int i = 0; i < 12; ++i)
+	{
 		printf("%-16s $%-11.2f\n",months[i],data[i]);
+	}
 }
 
 
-int main() {
+int main()
+{
 	/* Scans input file data into the data array. */
 	FILE *fp;
 	fp = fopen("input.txt","r");
@@ -104,7 +113,9 @@ int main() {
 		return 1;
 	}
 	for(int i = 0; i < 12; i++)
+	{
 		fscanf(fp, "%f", &data[i]);
+	}
 	fclose(fp);
 
 	sales_report(data);
